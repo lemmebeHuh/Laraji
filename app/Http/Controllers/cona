@@ -1,0 +1,17 @@
+            'foto' => $fileName,
+
+
+
+$request->validate([
+            'title' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'product_code' => 'required',
+            'foto' => 'required|image|mimes:jpeg,png,gif|max:2048', // <-- Validasi foto
+        ]);
+
+        if ($request->file('foto')){
+            $fileName = $request->title.'.'.$request->foto->extension();
+            $request->foto->move(public_path('asset/img'), $fileName);
+        
+        }
